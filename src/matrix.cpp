@@ -5,9 +5,9 @@
 matrix_t::matrix_t(const matrix_t& M) {
     rows = M.rows;
     cols = M.cols;
-    _data = M._data;
+    data = M.data;
 }
-matrix_t::matrix_t(int h, int w) : _data(h * w, 0) {
+matrix_t::matrix_t(int h, int w) : data(h * w, 0) {
     rows = h;
     cols = w;
     // _data = std::vector<double>(h * w);
@@ -77,7 +77,7 @@ void matrix_t::operator=(const matrix_t& R) {
     if (this == &R) {
         return;
     }
-    this->_data = R._data;
+    this->data = R.data;
 }
 
 matrix_t matrix_t::T() {

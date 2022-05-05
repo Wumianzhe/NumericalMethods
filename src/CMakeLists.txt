@@ -13,3 +13,8 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -fsanitize=address")
 
 include_directories("${PROJECT_SOURCE_DIR}")
 add_library(matrix matrix.cpp)
+
+add_subdirectory(lab1)
+add_subdirectory(lab2)
+add_subdirectory(lab3)
+add_subdirectory(lab4)
