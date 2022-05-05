@@ -6,3 +6,18 @@ tmp/
 build/
 .cache
 **/compile_commands.json
+
+# tex things
+**/.auctex-auto/
+*.aux
+*.fdb_latexmk
+*.fls
+*.pdf
+*.toc
+
+*.jpg
+
+# program output
+**/octave-workspace
+*.csv
+*.bin
