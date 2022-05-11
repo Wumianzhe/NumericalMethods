@@ -3,10 +3,10 @@
 #include <iostream>
 #include <matrix.h>
 
-double f(double x, double y) { return y / x + x * cos(x); }
-double sol(double x) { return x * sin(x); }
-// double f(double x, double y) { return 3 * x * exp(-x) - (x + 1) / x * y; }
-// double sol(double x) { return x * x * exp(-x); }
+// double f(double x, double y) { return y / x + x * cos(x); }
+// double sol(double x) { return x * sin(x); }
+double f(double x, double y) { return 3 * x * exp(-x) - (x + 1) / x * y; }
+double sol(double x) { return x * x * exp(-x); }
 
 using namespace std;
 
@@ -19,10 +19,10 @@ int main(int argc, char* argv[]) {
     string dir = argv[0];
     dir = dir.substr(0, dir.find_last_of('/') + 1);
 
-    double a = 0.9;
-    double b = 3;
-    // double a = 1;
-    // double b = 5;
+    // double a = 0.9;
+    // double b = 3;
+    double a = 1;
+    double b = 5;
     double n = 10;
     double h_0 = (b - a) / n;
     matrix_t buf(n + 1, 4);

@@ -69,6 +69,34 @@ int main(int argc, char* argv[]) {
         fErrs << (b - a) / (n * pow(2, i)) << ", " << infnorm(precise - sol) << endl;
     }
     fErrs.close();
+
+    double A = bounds(0, 2), B = bounds(1, 2);
+    ofstream fDelta(dir + "delta.csv");
+    fDelta << scientific;
+    fDelta.precision(8);
+
+    matrix_t precise(n * 32 + 1);
+    for (int j = 0; j <= n * 32; j++) {
+        precise[j] = y(a + (b - a) / (n * 32) * j);
+    }
+
+    for (double d = 1e-13; d < 0.1; d *= 1.5) {
+        // bounds(0, 2) = A * (1 + d);
+        bounds(1, 2) = B * (1 + d);
+        matrix_t solP = ThomasRL(coefMat(a, b, bounds, n * 32, p, q, f));
+        // bounds(0, 2) = A * (1 - d);
+        bounds(1, 2) = B * (1 - d);
+        matrix_t solM = ThomasRL(coefMat(a, b, bounds, n * 32, p, q, f));
+        fDelta << d << ", " << infnorm(precise - solP) << ", " << infnorm(precise - solM) << endl;
+    }
+    fDelta.close();
+
+    bounds(0, 2) = A;
+    bounds(1, 2) = B;
+    matrix_t coefs = coefMat(a, b, bounds, 4, p, q, f);
+    cout << coefs;
+    cout << endl << endl;
+    cout << ThomasRL(coefs);
     return 0;
 }
 
@@ -110,11 +138,6 @@ matrix_t coefMat(const double a, const double b, const matrix_t& boundCoefs, int
     M(n, 2) = 0;
     M(n, 3) = 2 * B * h;
 
-    // // почему работает с +=
-    // M(n - 1, 3) += M(n - 1, 2) * B / b_0;
-    // M(n - 1, 2) = M(n - 1, 1);
-    // M(n - 1, 1) = M(n - 1, 0);
-    // M(n - 1, 0) = 0;
     return M;
 }
 

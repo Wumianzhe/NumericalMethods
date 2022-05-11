@@ -22,3 +22,22 @@ grid on;
 title('Графики ошибок на заданном отрезке');
 plot(data(1,:),data(3,:) - data(2,:),"r;\Delta(H);");
 plot(data(1,:),data(4,:) - data(2,:),"k;\Delta(H/2);");
+
+data = importdata([dir, "errs.csv"],',')';
+
+figure;
+hold on;
+grid on;
+title('График ошибки от величины шага')
+loglog(data(1,:),data(2,:),"k;err;");
+loglog(data(1,:),data(1,:).^2,"b;h^2;")
+coefs = data(2,:) ./ (data(1,:).^2);
+
+data = importdata([dir, "delta.csv"],',')';
+
+figure;
+hold on;
+grid on;
+title('График ошибки от возмущения входных данных')
+loglog(data(1,:),data(2,:),"r;+\Delta;");
+loglog(data(1,:),data(3,:),"b;-\Delta;");
