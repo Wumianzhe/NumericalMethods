@@ -58,7 +58,7 @@ double integrate(double a, double b, function<double(double)> f, int k) {
     return sum * h;
 }
 
-std::pair<double, int> epsIntegrate(double a, double b, function<double(double)> f, double eps) {
+pair<double, int> epsIntegrate(double a, double b, function<double(double)> f, double eps) {
     int k = 1;
     double prev = integrate(a, b, f, k);
     double next = integrate(a, b, f, ++k);
