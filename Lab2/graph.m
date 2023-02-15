@@ -5,7 +5,7 @@ fclose(file);
 a = 1;
 b = 2.5;
 n_low = 7;
-n_high = 1000;
+n_high = 100;
 
 figure;
 hold on;

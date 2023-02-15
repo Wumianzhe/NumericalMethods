@@ -42,7 +42,9 @@ semilogx(data(1,:),data(2,:),"k;iter;");
 data = importdata([dir, "delta.csv"],',')';
 figure;
 title('Ошибка от возмущения входных данных');
-loglog(data(1,:),data(2,:),"k;err;");
+hold on;
+loglog(data(1,:),data(2,:),"k;err-;");
+loglog(data(1,:),data(3,:),"b;err+;");
 
 data_h = importdata([dir, "step.csv"],',')';
 figure;

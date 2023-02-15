@@ -1,6 +1,7 @@
 #include "matrix.h"
 #include <algorithm>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <iterator>
 #include <numeric>
@@ -40,24 +41,10 @@ const double dstep = 0.001;
 
 int main(int argc, char* argv[]) {
     string dir = argv[0];
-    dir = dir.substr(0, dir.find_last_of('\\') + 1);
+    dir = dir.substr(0, dir.find_last_of('/') + 1);
 
     graphSuite(dir, "smooth", f, df);
     graphSuite(dir, "corner", g, dg);
-    // mesh_t polymesh = meshGen(a, b, 3, f);
-    // matrix_t M = ThomasAlg(coefMat(polymesh, df));
-    // cout << M << endl;
-    // matrix_t CM = constsMat(M, polymesh);
-    // cout << CM << endl;
-
-    // Expression x("x");
-    // for (int i = 1; i < 4; i++) {
-    //     double h = polymesh.h(i);
-    //     auto g_i = CM(i - 1, 0) * pow(polymesh.x[i] - x, 3) / (6 * h) +
-    //                CM(i, 0) * pow(x - polymesh.x[i - 1], 3) / (6 * h) + CM(i, 2) * (x - polymesh.x[i - 1]) + CM(i,
-    //                1);
-    //     cout << "g_" << i << ": " << expand(g_i) << endl;
-    // }
 
     return 0;
 }

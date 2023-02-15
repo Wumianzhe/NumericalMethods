@@ -78,13 +78,17 @@ int main(int argc, char* argv[]) {
     fDelta << scientific;
     fDelta.precision(8);
     for (double d = 1e-15; d < 0.1; d *= 1.5) {
-        double y = buf(0, 1) * (1 - d);
-        double err = 0;
+        double ym = buf(0, 1) * (1 - d);
+        double yp = buf(0, 1) * (1 + d);
+        double errm = 0;
+        double errp = 0;
         for (int i = 0; i < n; i++) {
-            y = epsStep(y, buf(i, 0), buf(i + 1, 0), 1e-9, f).first;
-            err = max(err, abs(y - buf(i + 1, 1)));
+            ym = epsStep(ym, buf(i, 0), buf(i + 1, 0), 1e-12, f).first;
+            yp = epsStep(yp, buf(i, 0), buf(i + 1, 0), 1e-12, f).first;
+            errm = max(errm, abs(ym - buf(i + 1, 1)));
+            errp = max(errp, abs(yp - buf(i + 1, 1)));
         }
-        fDelta << d << ", " << err << endl;
+        fDelta << d << ", " << errm << ", " << errp << endl;
     }
     fDelta.close();
 
